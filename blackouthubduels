@@ -14,19 +14,16 @@ ScreenGui.ResetOnSpawn = false
 
 -- 🔥 ORANGE THEME
 local COLORS = {
-    MainBG       = Color3.fromRGB(12, 8, 6),      -- Dark warm background
-    TabBG        = Color3.fromRGB(20, 14, 10),    -- Slightly lighter dark
-    Border       = Color3.fromRGB(255, 140, 0),   -- Vibrant Orange
-    TextActive   = Color3.fromRGB(255, 180, 60),  -- Bright orange
-    TextInactive = Color3.fromRGB(140, 110, 90),  -- Muted warm gray
-    RowBG        = Color3.fromRGB(18, 13, 10),    -- Dark orange-tinted
-    Accent       = Color3.fromRGB(255, 90, 0),    -- Deep fiery orange
-    ToggleOff    = Color3.fromRGB(28, 20, 15),    -- Darker off state
+    MainBG       = Color3.fromRGB(12, 8, 6),
+    TabBG        = Color3.fromRGB(20, 14, 10),
+    Border       = Color3.fromRGB(255, 140, 0),
+    TextActive   = Color3.fromRGB(255, 180, 60),
+    TextInactive = Color3.fromRGB(140, 110, 90),
+    RowBG        = Color3.fromRGB(18, 13, 10),
+    Accent       = Color3.fromRGB(255, 90, 0),
+    ToggleOff    = Color3.fromRGB(28, 20, 15),
 }
 
--------------------------------------------------------------------------
--- UI CORE ENGINE
--------------------------------------------------------------------------
 local function create(class, props)
     local obj = Instance.new(class)
     for k, v in pairs(props) do if k ~= "Parent" then obj[k] = v end end
@@ -37,7 +34,7 @@ end
 local ToggleIcon = create("TextButton", {
     Size = UDim2.new(0, 45, 0, 45), Position = UDim2.new(0.05, 0, 0.2, 0),
     BackgroundColor3 = COLORS.MainBG, Text = "Z", TextColor3 = COLORS.Border,
-    Font = "Code", TextSize = 22, Parent = ScreenGui
+    Font = Enum.Font.Code, TextSize = 22, Parent = ScreenGui
 })
 create("UICorner", {CornerRadius = UDim.new(0, 4), Parent = ToggleIcon})
 create("UIStroke", {Color = COLORS.Border, Thickness = 2, Parent = ToggleIcon})
@@ -49,26 +46,21 @@ local MainFrame = create("Frame", {
 create("UICorner", {CornerRadius = UDim.new(0, 6), Parent = MainFrame})
 create("UIStroke", {Color = COLORS.Border, Thickness = 2, Parent = MainFrame})
 
--- Top accent bar (fiery orange)
 create("Frame", {
-    Size = UDim2.new(1, 0, 0, 2),
-    Position = UDim2.new(0, 0, 0, 0),
-    BackgroundColor3 = COLORS.Accent,
-    BorderSizePixel = 0,
-    Parent = MainFrame
+    Size = UDim2.new(1, 0, 0, 2), Position = UDim2.new(0, 0, 0, 0),
+    BackgroundColor3 = COLORS.Accent, BorderSizePixel = 0, Parent = MainFrame
 })
 
 local Header = create("Frame", {Size = UDim2.new(1, 0, 0, 45), BackgroundTransparency = 1, Parent = MainFrame})
 create("TextLabel", {
-    Text = "BLACKOUT HUB DUELS", TextColor3 = COLORS.Border, Font = "Code", TextSize = 16,
+    Text = "BLACKOUT HUB DUELS", TextColor3 = COLORS.Border, Font = Enum.Font.Code, TextSize = 16,
     Size = UDim2.new(0.7, 0, 1, 0), Position = UDim2.new(0.05, 0, 0, 0),
-    BackgroundTransparency = 1, TextXAlignment = "Left", Parent = Header
+    BackgroundTransparency = 1, TextXAlignment = Enum.TextXAlignment.Left, Parent = Header
 })
--- Subtitle tag
 create("TextLabel", {
-    Text = "v2.0 // ORANGE", TextColor3 = COLORS.Accent, Font = "Code", TextSize = 10,
+    Text = "v2.0 // ORANGE", TextColor3 = COLORS.Accent, Font = Enum.Font.Code, TextSize = 10,
     Size = UDim2.new(0.3, 0, 1, 0), Position = UDim2.new(0.68, 0, 0, 0),
-    BackgroundTransparency = 1, TextXAlignment = "Right", Parent = Header
+    BackgroundTransparency = 1, TextXAlignment = Enum.TextXAlignment.Right, Parent = Header
 })
 
 local TabContainer = create("Frame", {
@@ -77,7 +69,6 @@ local TabContainer = create("Frame", {
 })
 create("UICorner", {CornerRadius = UDim.new(0, 4), Parent = TabContainer})
 create("UIStroke", {Color = COLORS.Border, Thickness = 1, Transparency = 0.7, Parent = TabContainer})
-local TabList = create("UIListLayout", {FillDirection = "Horizontal", HorizontalAlignment = "Center", Parent = TabContainer})
 
 local PageContainer = create("Frame", {
     Size = UDim2.new(1, 0, 0.75, 0), Position = UDim2.new(0, 0, 0.22, 0),
@@ -97,7 +88,7 @@ local function CreatePage(name)
 
     local TabBtn = create("TextButton", {
         Size = UDim2.new(0.25, 0, 1, 0), BackgroundTransparency = 1,
-        Text = name, TextColor3 = COLORS.TextInactive, Font = "Code", TextSize = 10,
+        Text = name, TextColor3 = COLORS.TextInactive, Font = Enum.Font.Code, TextSize = 10,
         Parent = TabContainer
     })
 
@@ -119,19 +110,15 @@ local function AddToggle(pageName, labelText, default, callback)
     create("UICorner", {CornerRadius = UDim.new(0, 4), Parent = Row})
     create("UIStroke", {Color = COLORS.Border, Thickness = 1, Transparency = 0.6, Parent = Row})
 
-    -- Left orange accent line
     create("Frame", {
-        Size = UDim2.new(0, 2, 0.6, 0),
-        Position = UDim2.new(0, 0, 0.2, 0),
-        BackgroundColor3 = COLORS.Accent,
-        BorderSizePixel = 0,
-        Parent = Row
+        Size = UDim2.new(0, 2, 0.6, 0), Position = UDim2.new(0, 0, 0.2, 0),
+        BackgroundColor3 = COLORS.Accent, BorderSizePixel = 0, Parent = Row
     })
 
     create("TextLabel", {
         Text = labelText, Size = UDim2.new(0.6, 0, 1, 0), Position = UDim2.new(0.06, 0, 0, 0),
-        TextColor3 = Color3.new(1, 1, 1), Font = "Code", TextSize = 13,
-        BackgroundTransparency = 1, TextXAlignment = "Left", Parent = Row
+        TextColor3 = Color3.new(1,1,1), Font = Enum.Font.Code, TextSize = 13,
+        BackgroundTransparency = 1, TextXAlignment = Enum.TextXAlignment.Left, Parent = Row
     })
 
     local TglBg = create("Frame", {
@@ -144,17 +131,17 @@ local function AddToggle(pageName, labelText, default, callback)
     local Circle = create("Frame", {
         Size = UDim2.new(0, 14, 0, 14),
         Position = active and UDim2.new(0.58, 0, 0.15, 0) or UDim2.new(0.08, 0, 0.15, 0),
-        BackgroundColor3 = active and Color3.new(1, 1, 1) or COLORS.Border, Parent = TglBg
+        BackgroundColor3 = active and Color3.new(1,1,1) or COLORS.Border, Parent = TglBg
     })
     create("UICorner", {CornerRadius = UDim.new(0, 3), Parent = Circle})
 
-    local Btn = create("TextButton", {Size = UDim2.new(1, 0, 1, 0), BackgroundTransparency = 1, Text = "", Parent = Row})
+    local Btn = create("TextButton", {Size = UDim2.new(1,0,1,0), BackgroundTransparency = 1, Text = "", Parent = Row})
     Btn.MouseButton1Click:Connect(function()
         active = not active
         TweenService:Create(TglBg, TweenInfo.new(0.18), {BackgroundColor3 = active and COLORS.Border or COLORS.ToggleOff}):Play()
         TweenService:Create(Circle, TweenInfo.new(0.18), {
-            Position = active and UDim2.new(0.58, 0, 0.15, 0) or UDim2.new(0.08, 0, 0.15, 0),
-            BackgroundColor3 = active and Color3.new(1, 1, 1) or COLORS.Border
+            Position = active and UDim2.new(0.58,0,0.15,0) or UDim2.new(0.08,0,0.15,0),
+            BackgroundColor3 = active and Color3.new(1,1,1) or COLORS.Border
         }):Play()
         callback(active)
     end)
@@ -164,22 +151,65 @@ for _, tab in ipairs({"Combat", "Protect", "Visual", "Settings"}) do CreatePage(
 TabButtons["Combat"].TextColor3 = COLORS.TextActive
 Pages["Combat"].Visible = true
 
--- Rest of your script remains unchanged (SafeFollow, AntiRagdoll, ESP, Speed, etc.)
+-- ==================== FEATURES ====================
 
--------------------------------------------------------------------------
--- (All the modules below stay exactly the same)
--------------------------------------------------------------------------
--- SAFE FOLLOW MODULE, ANTI-RAGDOLL, ANTI TURRET, XRAY, NO ANIM, ESP, SPEED CUSTOMIZER, INF JUMP, etc.
--- ... [your original code from SafeFollow to the end] ...
+-- Combat
+AddToggle("Combat", "Auto Bat", false, function(v)
+    -- your auto bat code here
+end)
 
--------------------------------------------------------------------------
--- SETUP & DRAG
--------------------------------------------------------------------------
+AddToggle("Combat", "Melee Aimbot", false, function(v)
+    -- your melee aimbot code here
+end)
+
+AddToggle("Combat", "Speed Customizer", false, function(v)
+    -- speed customizer toggle
+end)
+
+AddToggle("Combat", "Inf Jump", false, function(v)
+    -- inf jump toggle
+end)
+
+AddToggle("Combat", "Lock Target", false, function(v)
+    -- safe follow / lock target
+end)
+
+-- Protect
+AddToggle("Protect", "Optimizer", false, function(v) end)
+AddToggle("Protect", "Anti-Ragdoll", false, function(v) end)
+AddToggle("Protect", "Anti Bee & Disco", false, function(v) end)
+AddToggle("Protect", "Anti Turret", false, function(v) end)
+
+-- Visual
+AddToggle("Visual", "Xray Base", false, function(v) end)
+AddToggle("Visual", "No Anim", false, function(v) end)
+AddToggle("Visual", "Player ESP", false, function(v) end)
+
+-- Drag & Toggle
 local function drag(f)
     local d, ds, sp
-    f.InputBegan:Connect(function(i) if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then d, ds, sp = true, i.Position, f.Position end end)
-    UserInputService.InputChanged:Connect(function(i) if d and (i.UserInputType == Enum.UserInputType.MouseMovement or i.UserInputType == Enum.UserInputType.Touch) then local delta = i.Position - ds f.Position = UDim2.new(sp.X.Scale, sp.X.Offset + delta.X, sp.Y.Scale, sp.Y.Offset + delta.Y) end end)
-    f.InputEnded:Connect(function(i) if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then d = false end end)
+    f.InputBegan:Connect(function(i)
+        if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then
+            d, ds, sp = true, i.Position, f.Position
+        end
+    end)
+    UserInputService.InputChanged:Connect(function(i)
+        if d and (i.UserInputType == Enum.UserInputType.MouseMovement or i.UserInputType == Enum.UserInputType.Touch) then
+            local delta = i.Position - ds
+            f.Position = UDim2.new(sp.X.Scale, sp.X.Offset + delta.X, sp.Y.Scale, sp.Y.Offset + delta.Y)
+        end
+    end)
+    f.InputEnded:Connect(function(i)
+        if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then d = false end
+    end)
 end
-drag(MainFrame); drag(ToggleIcon)
-ToggleIcon.MouseButton1Click:Connect(function() MainFrame.Visible = not MainFrame.Visible end)
+
+drag(MainFrame)
+drag(ToggleIcon)
+
+ToggleIcon.MouseButton1Click:Connect(function()
+    MainFrame.Visible = not MainFrame.Visible
+end)
+
+print("Blackout Hub Duels - Orange Theme Loaded 🔥")
+]])()
